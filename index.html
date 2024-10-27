@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ดาริน บมพรมราช(โค้ชดาริน)</title>
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" type="image/x-icon">
-<link rel="shortcut icon" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" type="image/x-icon">
-<link rel="icon" href="https://https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Prize Draw</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f7f9fc;
+    }
+    .prize-container {
+      text-align: center;
+    }
+    .spinner-border {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+    }
+    .btn-start {
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
-<iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="https://script.google.com/macros/s/AKfycbyMlQ9G6G_XKju8temEmAt_DZlXTo5pbE_lBAkLnJDtg8fkM_AybFCK4gWWWUZFbWxESA/exec"></iframe>
+  <div class="prize-container">
+    <h1>Random Prize Draw</h1>
+    <p>Click the button below to draw a random prize!</p>
+    <button class="btn btn-primary btn-start" onclick="startDraw()">Start Drawing</button>
+    <div id="loading" class="mt-3" style="display: none;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Drawing...</p>
+    </div>
+  </div>
+
+  <script>
+    const prizes = [
+      { name: "Coffee", img: "https://example.com/coffee.jpg" },
+      { name: "Toothpaste", img: "https://example.com/toothpaste.jpg" },
+      { name: "Vitamin C", img: "https://example.com/vitamin_c.jpg" },
+      { name: "Cocoa", img: "https://example.com/cocoa.jpg" },
+      { name: "Collagen", img: "https://example.com/collagen.jpg" },
+      { name: "SunScreen", img: "https://example.com/sunscreen.jpg" }
+    ];
+
+    function startDraw() {
+      document.getElementById('loading').style.display = 'block';
+
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * prizes.length);
+        const prize = prizes[randomIndex];
+        document.getElementById('loading').style.display = 'none';
+
+        Swal.fire({
+          title: 'Congratulations!',
+          text: `You won a prize: ${prize.name}!`,
+          imageUrl: prize.img,
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: prize.name,
+          icon: 'success',
+          confirmButtonText: 'Awesome!'
+        });
+      }, 3000); // delay for 3 seconds to simulate loading
+    }
+  </script>
 </body>
 </html>
